@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 
+import 'package:expense_tracker/models/expense.dart';
+import 'package:expense_tracker/widgets/expense_list.dart';
 import 'package:flutter/material.dart';
 
 class Expenses extends StatefulWidget {
@@ -10,6 +12,19 @@ class Expenses extends StatefulWidget {
 }
 
 class _ExpensesState extends State<Expenses> {
+  final List<ExpenseModel> _expenseList = [
+    ExpenseModel(
+        title: "Pizza",
+        amount: 1000.00,
+        date: DateTime.now(),
+        category: Category.food),
+    ExpenseModel(
+        title: "wifi Bill",
+        amount: 2500.00,
+        date: DateTime.now(),
+        category: Category.bills)
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +36,17 @@ class _ExpensesState extends State<Expenses> {
         backgroundColor: const Color.fromARGB(255, 43, 100, 199),
         actions: [
           IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.add,
-                color: Colors.white,
-                size: 35,
-              ))
+            onPressed: () {},
+            icon: Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 35,
+            ),
+          )
         ],
+      ),
+      body: Column(
+        children: [ExpenseList(expenseList: _expenseList)],
       ),
     );
   }
