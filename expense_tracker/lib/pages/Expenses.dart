@@ -22,7 +22,12 @@ class _ExpensesState extends State<Expenses> {
         title: "wifi Bill",
         amount: 2500.00,
         date: DateTime.now(),
-        category: Category.bills)
+        category: Category.bills),
+    ExpenseModel(
+        title: "class Fees",
+        amount: 1500,
+        date: DateTime.now(),
+        category: Category.education),
   ];
 
   @override

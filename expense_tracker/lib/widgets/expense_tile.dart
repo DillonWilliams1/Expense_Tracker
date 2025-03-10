@@ -27,11 +27,11 @@ class ExpenseTile extends StatelessWidget {
                 const Spacer(),
                 Row(
                   children: [
-                    Icon(Icons.account_tree_rounded),
+                    Icon(CategoryIcons[expense.category]),
                     SizedBox(
                       width: 10,
                     ),
-                    Text(expense.date.toString()),
+                    Text(expense.getformattedDate),
                   ],
                 )
               ],
@@ -40,6 +40,5 @@ class ExpenseTile extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }
