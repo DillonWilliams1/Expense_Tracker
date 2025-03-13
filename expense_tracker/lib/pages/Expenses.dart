@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:expense_tracker/models/expense.dart';
+import 'package:expense_tracker/widgets/add_new_expense.dart';
 import 'package:expense_tracker/widgets/expense_list.dart';
 import 'package:flutter/material.dart';
 
@@ -30,6 +31,17 @@ class _ExpensesState extends State<Expenses> {
         category: Category.education),
   ];
 
+  //add function overlay
+
+  void _openAddExpenseOverlay() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return AddNewExpense();
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +53,7 @@ class _ExpensesState extends State<Expenses> {
         backgroundColor: const Color.fromARGB(255, 43, 100, 199),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: _openAddExpenseOverlay,
             icon: Icon(
               Icons.add,
               color: Colors.white,
