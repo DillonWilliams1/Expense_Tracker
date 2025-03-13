@@ -47,6 +47,23 @@ class _AddNewExpenseState extends State<AddNewExpense> {
             ),
 
             //date
+            Expanded(
+                child: Row(
+              children: [
+                Text("2025/12/12"),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.calendar_today),
+                )
+              ],
+            ),
+            )
+          ],
+        ),
+        //add category dropdown
+        Row(
+          children: [
+            DropdownButton(items: , onChanged: (){},)
           ],
         )
       ],
