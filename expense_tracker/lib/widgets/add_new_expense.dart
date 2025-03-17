@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:expense_tracker/models/expense.dart';
 
 class AddNewExpense extends StatefulWidget {
   const AddNewExpense({super.key});
@@ -10,6 +11,8 @@ class AddNewExpense extends StatefulWidget {
 class _AddNewExpenseState extends State<AddNewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+
+  Category selectedCategory = Category.food;
 
   @override
   void dispose() {
@@ -48,22 +51,38 @@ class _AddNewExpenseState extends State<AddNewExpense> {
 
             //date
             Expanded(
-                child: Row(
-              children: [
-                Text("2025/12/12"),
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.calendar_today),
-                )
-              ],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text("2025/12/12"),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.calendar_today),
+                  )
+                ],
+              ),
             ),
-            )
           ],
         ),
         //add category dropdown
         Row(
           children: [
-            DropdownButton(items: , onChanged: (){},)
+            DropdownButton(
+              value: selectedCategory,
+              items: Category.values
+                  .map(
+                    (category) => DropdownMenuItem(
+                      value: category,
+                      child: Text(category.name),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (value) {
+                setState(() {
+                  selectedCategory = value!;
+                });
+              },
+            )
           ],
         )
       ],
