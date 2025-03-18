@@ -14,6 +14,30 @@ class _AddNewExpenseState extends State<AddNewExpense> {
 
   Category selectedCategory = Category.food;
 
+  final DateTime initialDate = DateTime.now();
+  final DateTime firstDate = DateTime(
+      DateTime.now().year - 1, DateTime.now().month, DateTime.now().day);
+  final DateTime lastDate = DateTime(
+      DateTime.now().year + 1, DateTime.now().month, DateTime.now().day);
+
+  DateTime _selectedDate = DateTime.now();
+
+  Future<void> _openDateModal() async {
+    try {
+      final pickedDate = await showDatePicker(
+          context: context,
+          initialDate: initialDate,
+          firstDate: firstDate,
+          lastDate: lastDate);
+
+      setState(() {
+        _selectedDate = pickedDate!;
+      });
+    } catch (err) {
+      print(err.toString());
+    }
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -56,9 +80,9 @@ class _AddNewExpenseState extends State<AddNewExpense> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text("2025/12/12"),
+                    Text(formattedDate.format(_selectedDate)),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: _openDateModal,
                       icon: const Icon(Icons.calendar_today),
                     )
                   ],
