@@ -22,6 +22,7 @@ class _AddNewExpenseState extends State<AddNewExpense> {
 
   DateTime _selectedDate = DateTime.now();
 
+//date picker
   Future<void> _openDateModal() async {
     try {
       final pickedDate = await showDatePicker(
@@ -35,6 +36,34 @@ class _AddNewExpenseState extends State<AddNewExpense> {
       });
     } catch (err) {
       print(err.toString());
+    }
+  }
+
+  //form submit
+
+  void _handleFormSubmit() {
+    final userAmount = double.parse(_amountController.text.trim());
+
+    if (_titleController.text.trim().isEmpty || userAmount <= 0) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return (AlertDialog(
+            title: const Text("Enter Valid Data"),
+            content: const Text(
+                "Please enter Expense title or amount can not be 0 and less than Zero"),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("Close"))
+            ],
+          ));
+        },
+      );
+    } else {
+      print("save data");
     }
   }
 
@@ -127,7 +156,9 @@ class _AddNewExpenseState extends State<AddNewExpense> {
                   backgroundColor: WidgetStatePropertyAll(
                       const Color.fromARGB(255, 242, 96, 83)),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 child: Text(
                   "Close",
                   style: TextStyle(color: Colors.white),
@@ -141,7 +172,7 @@ class _AddNewExpenseState extends State<AddNewExpense> {
                   backgroundColor: WidgetStatePropertyAll(
                       const Color.fromARGB(255, 49, 138, 221)),
                 ),
-                onPressed: () {},
+                onPressed: _handleFormSubmit,
                 child: Text(
                   "Save",
                   style: TextStyle(color: Colors.white),
